@@ -1,0 +1,46 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="blog container my-5">
+	<div class="row">
+    <div class="post col-lg-8 col-md-8 col-12 pt-5">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="sidebar col-lg-4 col-md-4 col-12 pt-5 pl-5" >
+			<div class="side2 pb-5">
+				<h4>Recent Posts</h4>
+				<hr class="w-50">
+				{% for post in posts|slice:":2" %}
+				<div class="row pb-3">
+					<div class="sideimg col-lg-4 col-md-4 col-4">
+						<img class="img-fluid" src="{{ post.post_image.url }}">
+					</div>
+					<div class="sidetext col-lg-8 col-md-8 col-8">
+						<h5><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h5>
+						<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+						<small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>						
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+  </div>
+</section>
+{% endblock content %}

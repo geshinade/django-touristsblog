@@ -1,0 +1,270 @@
+*{
+    font-family: 'Nunito', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    outline: none; border:none;
+    text-decoration: none;
+    transition: all .2s linear;
+  }
+
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+  
+  ul {
+    margin: 0;
+  }
+  
+  .bg-steel {
+    background-color: #5f788a;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+
+  .navbar-brand span{
+    color: orange;
+  }
+  
+  .content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  #home{
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    z-index: 0;
+  }
+
+#home .content{
+    text-align: center;
+}
+#home .content h3{
+  font-size: 2rem;
+  text-align: center;
+  color:#fff;
+  
+  text-shadow: 0 .3rem .5rem rgba(0,0,0,.1);
+}
+
+#home .content p{
+  font-size: 1.5rem;
+  color:#fff;
+  padding:.5rem 0;
+}
+
+#home .video-container video{
+  position: absolute;
+  top:0; left: 0;
+  z-index: -1;
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+}
+
+ #home .controls{
+  padding:1rem;
+  border-radius: 5rem;
+  background:rgba(0,0,0,.7);
+  position: relative;
+  top:3rem;
+}
+
+#home .controls .vid-btn{
+  height:2rem;
+  width:2rem;
+  display: inline-block;
+  border-radius: 50%;
+  background:#fff;
+  cursor: pointer;
+  margin:0 .5rem;
+}
+
+#home .controls .vid-btn.active{
+  background:var(--orange);
+}
+
+
+.article-data-container{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 2rem 1.5rem;
+    background-color: var(--transparent-dark-color);
+    z-index: 10;
+    transition: background-color .5s;
+}
+
+.featured .row .one{
+	height: 300px;
+}
+
+.featured .row .one img{
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	box-sizing: border-size;
+	object-fit: cover;
+}
+
+.featured .row .one .text{
+	background:rgba(0,0,0,0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.featured .row .one .text p{
+	letter-spacing: 0.2rem;
+	line-height: 2px;
+}
+
+.featured .row .one .text a{
+	text-decoration: none;
+	border-style: none;
+	color: #fff;
+	font-size: 0.8rem;
+}
+
+.featured .row .one .text a::after{
+	content: "";
+	display: block;
+	width: 30%;
+	height: 2px;
+	background: #2ecc71;
+}
+
+.subscription{
+	background: #defadb;
+}
+.subscription .row .sub input{
+	outline: none;
+	border: 1px solid #6caa7f;
+}
+
+.subscription .row .sub input::placeholder{
+	font-size: 0.9rem;
+}
+
+.blog .row .post .read-more{
+	font-size: 0.9rem;
+	color: #27ae60;
+	font-weight: bold;
+	text-decoration: none;
+	border-style: none;
+}
+
+.blog .row .post .post-title{
+	font-size: 0.9rem;
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+	border-style: none;
+}
+
+.blog .row .post .sidebar .side2 .row .sidetext h4{
+	font-size: 1rem;
+}
+
+.blog .row .post .sidebar .side2 .row .sidetext a{
+	text-decoration: none;
+	border-style: none;
+	color: #6caa7f;
+	font-size: 0.8rem;
+}
+
+.blog .side3 .one{
+	height: 300px;
+	position: relative;
+}
+
+.blog .side3 .one img{
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	box-sizing: border-size;
+	object-fit: cover;
+}
+
+.blog .side3 .one .text{
+	background:rgba(0,0,0,0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10rem 1.1rem 0 1.1rem;
+}

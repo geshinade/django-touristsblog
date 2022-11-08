@@ -1,0 +1,90 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="blog container my-5">
+	<div class="row">
+		<div class="post col-lg-12 col-md-12 col-12" id="home">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-{{ message.tags }} mb-5">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+				<div class="content">
+					<h3 >share your travel experiences</h3>
+					<p>discover new places, meet new people</p>
+				</div>					
+				<div class="controls">
+					<span class="vid-btn active" data-src="{% static 'images/featured/vid-1.mp4' %}"></span>
+					<span class="vid-btn" data-src="{% static 'images/featured/vid-2.mp4' %}"></span>
+					<span class="vid-btn" data-src="{% static 'images/featured/vid-3.mp4' %}"></span>
+					<span class="vid-btn" data-src="{% static 'images/featured/vid-4.mp4' %}"></span>
+				</div>
+				<div class="video-container">
+					<video src="{% static 'images/featured/vid-1.mp4' %}" id="video-slider" loop autoplay muted></video>
+				</div>     		
+		</div>
+		<div class="post col-lg-8 col-md-8 col-12 pt-5">
+			<div class="row">
+			{% for post in posts %}
+			<div class="col-g-6 col-md-6 col-12 pb-4">
+				<img class="img-fluid pb-3" src="{{ post.post_image.url }}">
+				<h3 class="post-title"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+				<p
+				{{post.content|safe|truncatewords:"20"|linebreaks }}
+				<a class="read-more" href="{% url 'post-detail' post.id %}">Read more</a>
+				</p>          
+			</div>
+
+			{% endfor %}
+
+			</div>	
+		{% if is_paginated %}
+
+			{% if page_obj.has_previous %}
+				<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+			{% endif %}
+
+			{% for num in page_obj.paginator.page_range %}
+				{% if page_obj.number == num %}
+				<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+				{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+				<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+				{% endif %}
+			{% endfor %}
+
+			{% if page_obj.has_next %}
+				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+				<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+			{% endif %}
+		{% endif %}			
+		</div>
+		<div class="sidebar col-lg-4 col-md-4 col-12 pt-5 pl-5" >
+			<div class="side2 pb-5">
+				<h4>Recent Posts</h4>
+				<hr class="w-50">
+				{% for post in posts|slice:":2" %}
+				<div class="row pb-3">
+					<div class="sideimg col-lg-4 col-md-4 col-4">
+						<img class="img-fluid" src="{{ post.post_image.url }}">
+					</div>
+					<div class="sidetext col-lg-8 col-md-8 col-8">
+						<h5><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h5>
+						<a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+						<small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>						
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}
+
+

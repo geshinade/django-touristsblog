@@ -1,0 +1,72 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <!-- Blog listing -->
+    <section class="pt-5">
+      <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>		
+          <div class="container pt-5">
+            <div class="row mb-5">
+              <div class="col-lg-8">
+                <div class="row text-center">
+            {% for post in posts %}
+                  <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="{{ post.post_image.url }}" alt=""/></a>
+                    <ul class="list-inline small text-uppercase mb-0">
+                      <li class="list-inline-item me-0 text-gray align-middle">By </li>
+                      <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></li>
+                      <li class="list-inline-item text-gray align-middle me-0">|</li>
+                      <li class="list-inline-item text-gray align-middle">{{ post.date_posted|date:"F d, Y" }}</li>
+                    </ul>
+                    <h3 class="h4 mt-2"> <a class="reset-anchor" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h3>
+            <p class="text-small mb-1">
+            {{post.content|safe|truncatewords:"30"|linebreaks }}
+              <a class="btn btn-link" href="{% url 'post-detail' post.id %}">Continue reading</a>
+            </p> 
+                  </div>
+            {% endfor %}
+                </div>
+                <!-- Listing navigation -->
+                <div class="p-4 bg-light mb-5">
+                  <div class="row gy-2">
+             {% if is_paginated %}
+              {% if page_obj.has_previous %}
+              <div class="col-sm-6 text-center text-sm-start"><a class="btn btn-outline-secondary btn-sm" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-left me-2"></i>Prev posts</a></div>
+              {% endif %}
+              {% if page_obj.has_next %}
+              <div class="col-sm-6 text-center text-sm-end"><a class="btn btn-outline-secondary btn-sm" href="?page={{ page_obj.next_page_number }}">Next posts<i class="fas fa-angle-right ms-2"></i></a></div>
+              {% endif %}
+             {% endif %}
+                  </div>
+                </div>	
+              </div>
+              <!-- Sidebar -->
+              <div class="col-lg-4">
+                <!-- About me widget -->
+                <div class="mb-5 text-center">
+                  <img class="mb-3 rounded-circle img-thumbnail shadow-sm" src="{{ object.author.profile.image.url }}" alt="" width="110">
+                  <h3 class="h4">About me</h3>
+                  <p class="text-sm text-muted px-sm-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                  <ul class="list-inline text-sm mb-0">
+                    <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-youtube"></i></a></li>
+                    <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-vimeo-v"></i></a></li>
+                  </ul>
+                </div>
+                <!-- Newsletter widget -->
+                <div class="px-4 py-5 bg-light mb-5 text-center">
+                  <h3 class="h5"><i class="far fa-envelope me-2"></i>Join the family</h3>
+                  <p class="text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                  <form action="#">
+                    <div class="mb-1">
+                      <input class="form-control form-control-sm" type="email" name="email" placeholder="Emaill address">
+                    </div>
+                    <div class="mb-0">
+                      <button class="btn btn-dark w-100 btn-sm" type="submit">Subscribe</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+{% endblock content %}
